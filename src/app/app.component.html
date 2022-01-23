@@ -1,0 +1,43 @@
+<div class="m-5">
+    <nav class="navbar navbar-light bg-light mb-5">
+        <a class="navbar-brand">listado datos</a>
+        <form class="d-flex">
+            <input class="form-control me-2" name="filterdata" type="search" placeholder="Buscar..." [(ngModel)]="filterdata">
+        </form>
+    </nav>
+    <div class="card">
+        <div class="card-header">
+            Listado de procesos actuales
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col"># Movimiento</th>
+                        <th scope="col">Número de proceso</th>
+                        <th scope="col">Etapa del proceso</th>
+                        <th scope="col">Despacho</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of datos | filter:filterdata | paginate: { itemsPerPage: 5, currentPage: page }">
+                        <td scope="row">{{ data.idMov }}</td>
+                        <td>{{data.idProceso}}</td>
+                        <td>{{data.idEtapaProceso}}</td>
+                        <td>{{data.detalle}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+</div>
